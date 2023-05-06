@@ -103,3 +103,13 @@ const Car: Vehicle = {
 
 // We cannot merge and extend Types
 // Interface is used for objects
+
+// Unions
+type ID = number | string;
+
+// Narrowing
+function printID(id: ID) {
+  typeof id === "string" ? console.log(id.toUpperCase()) : console.log(id);
+}
+// printID(1);
+// printID("peter");

@@ -42,5 +42,8 @@ var Car = {
     wheels: 4,
     isElectric: true
 };
-// We cannot merge and extend Types
-// Interface is used for objects
+function printID(id) {
+    typeof id === "string" ? console.log(id.toUpperCase()) : console.log(id);
+}
+printID(1);
+printID("peter");

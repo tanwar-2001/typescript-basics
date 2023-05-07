@@ -113,3 +113,105 @@ function printID(id: ID) {
 }
 // printID(1);
 // printID("peter");
+
+function getFirstThree(x: string | number[]) {
+  return x.slice(0, 3);
+}
+// console.log(getFirstThree("Lambo"));
+// console.log(getFirstThree([1, 2, 3, 4, 5]));
+
+// Generics
+function logString(args: string) {
+  console.log(args);
+  return args;
+}
+// logString("log string");
+
+function logNumber(args: number) {
+  console.log(args);
+  return args;
+}
+// logNumber(1);
+
+function logArray(args: any) {
+  console.log(args);
+  return args;
+}
+// logArray([1, 2, 3]);
+
+function logAnything<T>(args: T): T {
+  console.log(args);
+  return args;
+}
+
+// logAnything([4, 3]);
+
+interface HasAge {
+  age: number;
+}
+
+function getOldest(people: HasAge[]): HasAge {
+  return people.sort((a, b) => b.age - a.age)[0];
+}
+
+const people: HasAge[] = [{ age: 30 }, { age: 40 }, { age: 10 }];
+
+// console.log(getOldest(people).age);
+
+interface Player {
+  name: string;
+  age: number;
+}
+
+const players: Player[] = [
+  { name: "John", age: 30 },
+  { name: "Jane", age: 35 },
+  { name: "Joe", age: 60 },
+];
+
+// Assertion
+// const person = getOldest(players) as Player;
+// console.log(person.name);
+
+function getOldest1<T extends HasAge>(people: T[]): T {
+  return people.sort((a, b) => b.age - a.age)[0];
+}
+
+const person1 = getOldest1(players);
+const person2 = getOldest1(people);
+// console.log(person1);
+// console.log(person2);
+
+interface IPost {
+  title: string;
+  id: number;
+  discription: string;
+}
+
+interface IUser {
+  id: number;
+  name: string;
+  age: number;
+}
+
+const fetchPostData = async (path: string): Promise<IPost[]> => {
+  const response = await fetch(`http://example.com/${path}`);
+  return response.json();
+};
+
+const fetchUsersData = async (path: string): Promise<IUser[]> => {
+  const response = await fetch(`http://example.com/${path}`);
+  return response.json();
+};
+
+const fetchData = async <ResultType>(path: string): Promise<ResultType> => {
+  const response = await fetch(`http://example.com/${path}`);
+  return response.json();
+};
+
+(async () => {
+  // const posts = fetchPostData("/posts");
+  // const users = fetchUsersData("/users");
+  const users = fetchData<IUser>("/users");
+  const posts = fetchData<IPost>("/posts");
+})();

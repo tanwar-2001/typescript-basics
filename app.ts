@@ -212,6 +212,39 @@ const fetchData = async <ResultType>(path: string): Promise<ResultType> => {
 (async () => {
   // const posts = fetchPostData("/posts");
   // const users = fetchUsersData("/users");
-  const users = fetchData<IUser>("/users");
-  const posts = fetchData<IPost>("/posts");
+  // const users = fetchData<IUser>("/users");
+  // const posts = fetchData<IPost>("/posts");
 })();
+
+interface ICredential {
+  username: string;
+  password: string;
+  isAdmin?: boolean;
+}
+
+const signin = (cerdentials: ICredential) => {
+  console.log(cerdentials);
+  return true;
+};
+
+const user: ICredential = {
+  username: "Peter",
+  password: "secret",
+  isAdmin: true,
+};
+
+// signin(user);
+
+interface IAuth {
+  username: string;
+  password: string;
+  login(username: string, password: string): boolean;
+}
+
+const auth: IAuth = {
+  username: "peter",
+  password: "secret",
+  login(username, password) {
+    return true;
+  },
+};
